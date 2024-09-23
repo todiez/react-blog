@@ -1,11 +1,12 @@
+import BlogList from "./BlogList";
 import { useState } from "react";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "Tobi", id: 1 },
     {
-      title: "My second website",
-      body: "lorem ipsum...",
+      title: "My second",
+      body: "lorem ipsum",
       author: "Dora",
       id: 2,
     },
@@ -14,12 +15,10 @@ const Home = () => {
 
   return (
     <div className="home">
-      {blogs.map((blog) => (
-        <div className="blog-preview" key={blog.id}>
-            <h2>{blog.title}</h2>
-            <p>Written by {blog.author}</p>
-        </div>
-      ))}
+      <BlogList blogs={blogs} title='All my blogs!'/>
+      {
+        //Props is used to pass down the blogs from the parent to the child component called BlogList.js
+      }
     </div>
   );
 };
