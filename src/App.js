@@ -7,7 +7,6 @@ function App() {
       <Navbar />
       <div className="content">
         <Home />
-        below Home but inside content component
       </div>
     </div>
   );
