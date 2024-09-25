@@ -1,15 +1,13 @@
 import BlogList from "./BlogList";
-import { useState } from "react";
+import { getDB } from "./mongoDB";
+import React, { useState, useEffect } from "react";
+//use effect is a hook that runs a function on every render of the component, e.g. to fetch data
+//useState is a hook which rerenders the component on every state change
 
 const Home = () => {
   const [blogs, setBlogs] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "Tobi", id: 1 },
-    {
-      title: "My second",
-      body: "lorem ipsum",
-      author: "Dora",
-      id: 2,
-    },
+    { title: "My second site", body: "lorem ipsum...", author: "Dora", id: 2 },
     { title: "My third website", body: "lorem ipsum...", author: "Ida", id: 3 },
   ]);
 
@@ -18,6 +16,13 @@ const Home = () => {
     const newBlogs = blogs.filter((blog) => blog.id !== id);
     setBlogs(newBlogs);
   };
+
+  useEffect(() => {
+    //use effect is a hook that runs a function on every render of the component, e.g. to fetch data
+    //useState is a hook which rerenders the component on every state change
+    console.log("use effect ran");
+    
+  }, []);
 
   return (
     <div className="home">
