@@ -6,13 +6,32 @@ import React, { useState, useEffect } from "react";
 const Home = () => {
   const [blogs, setBlogs] = useState(null);
   const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     //use effect is a hook that runs a function on every render of the component, e.g. to fetch data
     //useState is a hook which rerenders the component on every state change
-   
-
     setTimeout(() => {
+      fetch("http://localhost:3000/db.js")
+        .then((res) => {
+          console.log(res);
+          if (!res.ok) {
+            throw Error("could not fetch the data");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setBlogs(data);
+          setIsPending(false);
+          setError(null);
+        })
+        .catch((err) => {
+          
+          setIsPending(false);
+          setError(err.message);
+        });
+
+      //fetch simulation
       setBlogs([
         {
           title: "My new website",
@@ -36,11 +55,11 @@ const Home = () => {
       setIsPending(false);
     }, 1000);
     console.log("use effect ran");
-    
   }, []);
 
   return (
     <div className="home">
+      {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
       {
         /* conditional templating with && --> checks left side first, is null at the beginning and therefore does not render the right side
