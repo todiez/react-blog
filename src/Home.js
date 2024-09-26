@@ -1,61 +1,10 @@
 import BlogList from "./BlogList";
-import React, { useState, useEffect } from "react";
-//use effect is a hook that runs a function on every render of the component, e.g. to fetch data
-//useState is a hook which rerenders the component on every state change
+import useFetch from "./useFetch";
 
 const Home = () => {
-  const [blogs, setBlogs] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    //use effect is a hook that runs a function on every render of the component, e.g. to fetch data
-    //useState is a hook which rerenders the component on every state change
-    setTimeout(() => {
-      fetch("http://localhost:3000/db.js")
-        .then((res) => {
-          console.log(res);
-          if (!res.ok) {
-            throw Error("could not fetch the data");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setBlogs(data);
-          setIsPending(false);
-          setError(null);
-        })
-        .catch((err) => {
-          
-          setIsPending(false);
-          setError(err.message);
-        });
-
-      //fetch simulation
-      setBlogs([
-        {
-          title: "My new website",
-          body: "lorem ipsum...",
-          author: "Tobi",
-          id: 1,
-        },
-        {
-          title: "My second site",
-          body: "lorem ipsum...",
-          author: "Dora",
-          id: 2,
-        },
-        {
-          title: "My third website",
-          body: "lorem ipsum...",
-          author: "Ida",
-          id: 3,
-        },
-      ]);
-      setIsPending(false);
-    }, 1000);
-    console.log("use effect ran");
-  }, []);
+  const {data: blogs, isPending, error} = useFetch('lochalhost')
+  //data: blogs --> means grab the data from the custom hook and call it blogs in this context
 
   return (
     <div className="home">
