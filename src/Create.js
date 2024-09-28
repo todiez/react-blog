@@ -11,10 +11,18 @@ const Create = () => {
   //   setTitle(e.target.value);
   // };
 
+  const handleSubmit = (e) => {
+    // prevent default action (page refresh)
+    e.preventDefault();
+    //create blog object
+    const blog = { title, body, author };
+    console.log(blog);
+  };
+
   return (
     <div className="create">
       <h2>Add a new Blog</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Blog Title:</label>
         <input
           type="text"
