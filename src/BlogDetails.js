@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 
 const BlogDetails = () => {
-  //hook to get url parameters
+  // Extracting id from URL parameters:
   const { id } = useParams();
 
   //hook to get the data for the blogs
@@ -23,7 +23,6 @@ const BlogDetails = () => {
       )}
     </div>
   );
-   console.log("data in blog details: ", blog);
 };
 
 export default BlogDetails;
