@@ -1,4 +1,4 @@
-const BlogList = ({ blogs, title }) => {
+const BlogList = ({ blogs, title, author }) => {
   // props object, passed down blogs are inside this object
   //and taken out of the object like the following or as a destructered object as done above
   // const blogs = props.blogs;

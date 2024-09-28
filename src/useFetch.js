@@ -12,8 +12,10 @@ const useFetch = (url) => {
   useEffect(() => {
     //use effect is a hook that runs a function on every render of the component, e.g. to fetch data
     //useState is a hook which rerenders the component on every state change
+
+    const abortCont = new AbortController();
     setTimeout(() => {
-      fetch(url)
+      fetch(url, { signal: abortCont.signal })
         .then((res) => {
           console.log(res);
           if (!res.ok) {
@@ -27,8 +29,12 @@ const useFetch = (url) => {
           setError(null);
         })
         .catch((err) => {
-          setIsPending(false);
-          setError(err.message);
+          if (err.name === "AbortError") {
+            console.log("fetch aborted");
+          } else {
+            setIsPending(false);
+            setError(err.message);
+          }
         });
 
       //fetch simulation
@@ -54,7 +60,9 @@ const useFetch = (url) => {
       ]);
       setIsPending(false);
     }, 1000);
+
     console.log("use effect ran");
+    return () => abortCont.abort();
   }, [url]);
 
   return { data, isPending, error };
