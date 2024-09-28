@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import Home from "./Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Create from "./Create";
+import BlogDetails from "./BlogDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             Navbar is shown all the time, therefore outside Routes*/}
             <Route path="/" element={<Home />}></Route>
             <Route path="/create" element={<Create />}></Route>
+            <Route path="/blogs/:id" element={<BlogDetails />}></Route>
           </Routes>
         </div>
       </div>

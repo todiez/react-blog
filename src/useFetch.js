@@ -59,7 +59,7 @@ const useFetch = (url) => {
         },
       ]);
       setIsPending(false);
-    }, 1000);
+    }, 200);
 
     console.log("use effect ran");
     return () => abortCont.abort();

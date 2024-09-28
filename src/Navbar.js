@@ -22,6 +22,7 @@ const Navbar = () => {
         >
           New Blog
         </Link>
+        <Link to="/blogs/0909">Details</Link>
       </div>
     </nav>
   );
