@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "./useFetch";
 
 const BlogDetails = () => {
@@ -7,7 +7,20 @@ const BlogDetails = () => {
 
   //hook to get the data for the blogs
   const { data: blog, error, isPending } = useFetch("url" + id);
-  console.log("data in blog details: ", blog);
+
+  const navigate = useNavigate();
+
+  //delete function
+  const handleDelete = (e) => {
+    // prevent default action (page refresh)
+    e.preventDefault();
+
+    fetch("endpoint of Ddatabase url" + blog.id, {
+      method: "DELETE",
+    }).then(() => {
+      navigate("/");
+    });
+  };
 
   return (
     <div className="blog-details">
@@ -19,6 +32,7 @@ const BlogDetails = () => {
           <h2>Title: {blog.title}</h2>
           <p>Written by {blog.author}</p>
           <div>Text: {blog.body}</div>
+          <button onClick={handleDelete}>Delete Blog</button>
         </article>
       )}
     </div>
