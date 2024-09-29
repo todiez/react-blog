@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   //state to keep track of the input values which can later be saved
@@ -6,6 +7,7 @@ const Create = () => {
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("Dora");
   const [isPending, setIsPending] = useState(false);
+  const navigate = useNavigate();
 
   //Alternative to () => setTitle() inside onChange of the input field
   // const handleChange = (e) => {
@@ -27,6 +29,7 @@ const Create = () => {
     }).then(() => {
       console.log("new blog added");
       setIsPending(false);
+      navigate("/"); //navigate back to previous page
     });
   };
 
