@@ -5,6 +5,7 @@ const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("Dora");
+  const [isPending, setIsPending] = useState(false);
 
   //Alternative to () => setTitle() inside onChange of the input field
   // const handleChange = (e) => {
@@ -16,7 +17,17 @@ const Create = () => {
     e.preventDefault();
     //create blog object
     const blog = { title, body, author };
-    console.log(blog);
+
+    setIsPending(true);
+
+    fetch("endpoint of Ddatabase url", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(blog),
+    }).then(() => {
+      console.log("new blog added");
+      setIsPending(false);
+    });
   };
 
   return (
@@ -41,10 +52,8 @@ const Create = () => {
           <option value="Dora">Dora</option>
           <option value="Ida">Ida</option>
         </select>
-        <button>Add Blog</button>
-        <p>Title: {title}</p>
-        <p>Body: {body}</p>
-        <p>Author: {author}</p>
+        {!isPending && <button>Add Blog</button>}
+        {isPending && <button disabled>Adding Blog..</button>}
       </form>
     </div>
   );
