@@ -9,6 +9,12 @@ const port = process.env.PORT;
 //the app variable now holds the main application object
 const app = express();
 
+//global middleware
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+});
+
 //router handler, supports reacting to specific requests
 //if a request comes in the function (2. argument) will be fired
 app.get("/", (req, res) => {
