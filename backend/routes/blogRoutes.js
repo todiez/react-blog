@@ -1,7 +1,13 @@
 //this file is to register the different routs only, everything else (db logic etc.) needs to be outsourced
 
 const express = require("express");
-const { createBlog, getBlogs, getBlog } = require("../controllers/blogController");
+const {
+  createBlog,
+  getBlogs,
+  getBlog,
+  deleteBlog,
+  updateBlog,
+} = require("../controllers/blogController");
 
 //create an instance of express router
 const router = express.Router();
@@ -19,13 +25,9 @@ router.get("/:id", getBlog);
 router.post("/", createBlog);
 
 //DELETE a blog
-router.delete("/:id", (req, res) => {
-  res.json({ message: "DELETE a Blog" });
-});
+router.delete("/:id", deleteBlog);
 
 //UPDATE a blog
-router.patch("/:id", (req, res) => {
-  res.json({ message: "UPDATED a Blog" });
-});
+router.patch("/:id", updateBlog);
 
 module.exports = router;

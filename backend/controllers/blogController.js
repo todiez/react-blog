@@ -54,11 +54,56 @@ const createBlog = async (req, res) => {
 };
 
 //DELETE a blog
+const deleteBlog = async (req, res) => {
+  //all route parameters are stored on params property
+  const { id } = req.params;
+
+  //check if ID is valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    //if not, just return with status 400
+    return res.status(404).json({ error: "Blog not found!" });
+  }
+
+  //_id is the name inside MongoDB
+  const blog = await Blog.findOneAndDelete({ _id: id });
+
+  if (!blog) {
+    //res back to client (browser)
+    return res.status(400).json({ error: "Blog not found!" });
+  }
+  //res to client (browser): sending back ok, blog was deleted
+  res.status(200).json(blog);
+};
 
 //UPDATE a blog
+const updateBlog = async (req, res) => {
+  //all route parameters are stored on params property
+  const { id } = req.params;
+
+  //check if ID is valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    //if not, just return with status 400
+    return res.status(404).json({ error: "Blog not found!" });
+  }
+
+  const blog = await Blog.findOneAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    }
+  );
+  if (!blog) {
+    //res back to client (browser)
+    return res.status(400).json({ error: "Blog not found!" });
+  }
+  //res to client (browser): sending back ok, blog was deleted
+  res.status(200).json(blog);
+};
 
 module.exports = {
   createBlog,
   getBlogs,
   getBlog,
+  deleteBlog,
+  updateBlog,
 };
