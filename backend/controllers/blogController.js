@@ -4,6 +4,27 @@
 const Blog = require("../models/blogMongooseSchema");
 
 //get ALL blogs
+const getBlogs = async (req, res) => {
+  //using Blog Model/Schema
+  const blogs = await Blog.find({}).sort({ createdAt: -1 });
+
+  //res to client (browser): sending back ok as well as all blogs in json format
+  res.status(200).json(blogs);
+};
+
+const getBlog = async (req, res) => {
+  //all route parameters are stored on params property
+  const { id } = req.params;
+  //using Blog Model/Schema
+  const blog = await Blog.findById(id);
+
+  if (!blog) {
+    //res back to client (browser)
+    return res.status(404).json({ error: "Blog not found" });
+  }
+  //res to client (browser): sending back ok as well as all blogs in json format
+  res.status(200).json(blog);
+};
 
 //get a SINGLE blog
 
@@ -29,7 +50,8 @@ const createBlog = async (req, res) => {
 
 //UPDATE a blog
 
-
 module.exports = {
-    createBlog
-}
+  createBlog,
+  getBlogs,
+  getBlog,
+};

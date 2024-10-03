@@ -1,7 +1,7 @@
 //this file is to register the different routs only, everything else (db logic etc.) needs to be outsourced
 
 const express = require("express");
-const { createBlog } = require("../controllers/blogController");
+const { createBlog, getBlogs, getBlog } = require("../controllers/blogController");
 
 //create an instance of express router
 const router = express.Router();
@@ -10,16 +10,12 @@ const router = express.Router();
 //if a request comes in the function (2. argument) will be fired
 
 //get ALL blogs
-router.get("/", (req, res) => {
-  res.json({ message: "Getting all Blogs" });
-});
+router.get("/", getBlogs);
 
 //get a SINGLE blog
-router.get("/:id", (req, res) => {
-  res.json({ message: "Getting a SINGLE Blogs" });
-});
+router.get("/:id", getBlog);
 
-//post a NEW blog
+//post a NEW blog, fire 2nd argument reference to blogController
 router.post("/", createBlog);
 
 //DELETE a blog
