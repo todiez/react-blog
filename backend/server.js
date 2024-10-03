@@ -11,6 +11,12 @@ const port = process.env.PORT;
 const app = express();
 
 //global middleware
+
+//necessary to access the request objects of the routes
+//looks if there is any body to the request coming in, if yes it is
+//parsing and attaching it to the request object
+app.use(express.json())
+
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
@@ -19,15 +25,9 @@ app.use((req, res, next) => {
 
 //grabs all different routes attached to the Router instance via
 //the variable blogRoutes and defined in the blogRoutes.js file
-//first argument: blogRoutes fired only when it comes to a specific path 
+//first argument: blogRoutes fired only when it comes to the specific path 
 app.use("/api/blogs", blogRoutes)
 
-//router handler, supports reacting to specific requests
-//if a request comes in the function (2. argument) will be fired
-app.get("/", (req, res) => {
-  res.json({ m: "Welcome to the App" });
-  //  res.send("Welcome to the App" );
-});
 
 //listen for requests
 app.listen(port, () => {
