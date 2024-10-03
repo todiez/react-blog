@@ -3,6 +3,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const blogRoutes = require("./routes/blogRoutes")
 const port = process.env.PORT;
 
 //create an express app be invoke an express function
@@ -14,6 +15,12 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+
+//grabs all different routes attached to the Router instance via
+//the variable blogRoutes and defined in the blogRoutes.js file
+//first argument: blogRoutes fired only when it comes to a specific path 
+app.use("/api/blogs", blogRoutes)
 
 //router handler, supports reacting to specific requests
 //if a request comes in the function (2. argument) will be fired
