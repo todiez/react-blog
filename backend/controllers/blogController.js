@@ -2,6 +2,7 @@
 //referenced from the router blogRoutes file
 
 const Blog = require("../models/blogMongooseSchema");
+const mongoose = require("mongoose");
 
 //get ALL blogs
 const getBlogs = async (req, res) => {
@@ -12,21 +13,27 @@ const getBlogs = async (req, res) => {
   res.status(200).json(blogs);
 };
 
+//get a SINGLE blog
 const getBlog = async (req, res) => {
   //all route parameters are stored on params property
   const { id } = req.params;
+
+  //check if ID is valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    //if not, just return with status 400
+    return res.status(404).json({ error: "Blog not found!" });
+  }
+
   //using Blog Model/Schema
   const blog = await Blog.findById(id);
 
   if (!blog) {
     //res back to client (browser)
-    return res.status(404).json({ error: "Blog not found" });
+    return res.status(404).json({ error: "Blog not found!" });
   }
   //res to client (browser): sending back ok as well as all blogs in json format
   res.status(200).json(blog);
 };
-
-//get a SINGLE blog
 
 //create a NEW blog
 const createBlog = async (req, res) => {
