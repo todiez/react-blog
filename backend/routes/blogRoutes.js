@@ -1,5 +1,7 @@
+//this file is to register the different routs only, everything else (db logic etc.) needs to be outsourced
+
 const express = require("express");
-const Blog = require("../models/blogMongooseSchema");
+const { createBlog } = require("../controllers/blogController");
 
 //create an instance of express router
 const router = express.Router();
@@ -18,22 +20,7 @@ router.get("/:id", (req, res) => {
 });
 
 //post a NEW blog
-router.post("/", async (req, res) => {
-  //grab all three properties from the request body, available due to the
-  //middle ware in servjer.js app.use((express.json))
-  const { title, content, author } = req.body;
-
-  //try to create a new Blog document inside the Blog collection of the db
-  try {
-    //storing the response of Blog.create inside blog, usually its the new document including the id of the doc
-    //inside create an object is passed through which represents the new document to create
-    const blog = await Blog.create({ title, content, author });
-    res.status(200).json(blog);
-  } catch (error) {
-    //error object has a message property on it
-    res.status(400).json({ error: error.message });
-  }
-});
+router.post("/", createBlog);
 
 //DELETE a blog
 router.delete("/:id", (req, res) => {
