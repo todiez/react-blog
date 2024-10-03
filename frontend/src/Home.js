@@ -3,7 +3,7 @@ import useFetch from "./useFetch";
 
 const Home = () => {
 
-  const {data: blogs, isPending, error} = useFetch('lochalhost')
+  const {data: blogs, isPending, error} = useFetch("/api/blogs/")
   //data: blogs --> means grab the data from the custom hook and call it blogs in this context
 
   return (
@@ -16,7 +16,8 @@ const Home = () => {
         //Props is used to pass down the blogs from the parent to the child component called BlogList.js
       }
       {blogs && <BlogList blogs={blogs} title="All blogs!" />}
-      {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === 'Dora')} title="Dora's blogs!" />}
+      {/* Blogs filtered for one author
+      {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === 'Dora')} title="Dora's blogs!" />} */}
     </div>
   );
 };
