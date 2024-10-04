@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // implement navigation around your application without causing a full page refresh
 // further, it is intercepting clicks to handle routing internally instead of a server request
 
+
 const Navbar = () => {
   return (
     <nav className="navbar">
