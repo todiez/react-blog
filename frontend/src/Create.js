@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
   //state to keep track of the input values which can later be saved
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [content, setContent] = useState("");
   const [author, setAuthor] = useState("Dora");
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
@@ -14,15 +14,16 @@ const Create = () => {
   //   setTitle(e.target.value);
   // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // prevent default action (page refresh)
     e.preventDefault();
     //create blog object
-    const blog = { title, body, author };
+    const blog = { title, content, author };
+    console.log(blog);
 
     setIsPending(true);
 
-    fetch("endpoint of Ddatabase url", {
+    const response = await fetch("/api/blogs/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
@@ -31,6 +32,8 @@ const Create = () => {
       setIsPending(false);
       navigate("/"); //navigate back to previous page
     });
+    //const json = await response.json();
+    console.log(response);
   };
 
   return (
@@ -47,8 +50,8 @@ const Create = () => {
         <label>Content:</label>
         <textarea
           required
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <label>Blog Author</label>
         <select value={author} onChange={(e) => setAuthor(e.target.value)}>

@@ -6,7 +6,7 @@ const BlogDetails = () => {
   const { id } = useParams();
 
   //hook to get the data for the blogs
-  const { data: blog, error, isPending } = useFetch("url" + id);
+  const { data: blog, error, isPending } = useFetch("/api/blogs/" + id);
 
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const BlogDetails = () => {
     // prevent default action (page refresh)
     e.preventDefault();
 
-    fetch("endpoint of Ddatabase url" + blog.id, {
+    fetch("/api/blogs/" + blog._id, {
       method: "DELETE",
     }).then(() => {
       navigate("/");
@@ -24,14 +24,13 @@ const BlogDetails = () => {
 
   return (
     <div className="blog-details">
-      <h2>Blog D'tails - {id}</h2>
-      {isPending && <div>Loading...</div>}
+        {isPending && <div>Loading...</div>}
       {error && <div>{error}</div>}
       {blog && (
         <article>
-          <h2>Title: {blog.title}</h2>
+          <h2>{blog.title}</h2>
           <p>Written by {blog.author}</p>
-          <div>Text: {blog.body}</div>
+          <div>{blog.content}</div>
           <button onClick={handleDelete}>Delete Blog</button>
         </article>
       )}

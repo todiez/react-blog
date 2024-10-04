@@ -15,7 +15,7 @@ const Home = () => {
        after useEffect run the side is rerendered and the blogs are set so blogs is true*/
         //Props is used to pass down the blogs from the parent to the child component called BlogList.js
       }
-      {blogs && <BlogList blogs={blogs} title="All blogs!" />}
+      {blogs && <BlogList blogs={blogs} pageTitle="All blogs!" />}
       {/* Blogs filtered for one author
       {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === 'Dora')} title="Dora's blogs!" />} */}
     </div>
