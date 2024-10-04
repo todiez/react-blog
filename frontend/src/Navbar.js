@@ -20,9 +20,8 @@ const Navbar = () => {
             }
           }
         >
-          New Blog
+          Add New Blog
         </Link>
-        <Link to="/blogs/0909">Details</Link>
       </div>
     </nav>
   );
