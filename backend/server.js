@@ -18,8 +18,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.REACT_BLOG_FRONTEND, // allow to server to accept request from this origin
-    optionsSuccessStatus: 200, // some legacy browsers choke on 204
+    origin: process.env.FRONTEND_URL, // allow to server to accept request from this origin
   })
 );
 
