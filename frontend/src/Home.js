@@ -3,7 +3,7 @@ import useFetch from "./useFetch";
 
 const Home = () => {
 
-  const {data: blogs, isPending, error} = useFetch("/api/blogs/")
+  const {data: blogs, isPending, error} = useFetch("https://blog-backend-express-server-8b4nr.ondigitalocean.app/api/blogs/")
   //data: blogs --> means grab the data from the custom hook and call it blogs in this context
 
   return (

@@ -5,11 +5,16 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const blogRoutes = require("./routes/blogRoutes");
+const cors = require("cors");
 const port = process.env.PORT;
 
 //create an express app be invoke an express function
 //the app variable now holds the main application object
 const app = express();
+
+// Enable CORS for all routes, later be specified to front end only
+//once deployed and url is available
+app.use(cors());
 
 //global middleware
 
