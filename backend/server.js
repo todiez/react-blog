@@ -18,7 +18,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://blog-xesut.ondigitalocean.app/", // allow to server to accept request from this origin
+    origin: process.env.FRONTEND_URL, // allow to server to accept request from this origin
+    credentials: true,
   })
 );
 
