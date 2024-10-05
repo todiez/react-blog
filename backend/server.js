@@ -14,7 +14,14 @@ const app = express();
 
 // Enable CORS for all routes, later be specified to front end only
 //once deployed and url is available
-app.use(cors());
+//app.use(cors());
+
+app.use(
+  cors({
+    origin: process.env.REACT_BLOG_FRONTEND, // allow to server to accept request from this origin
+    optionsSuccessStatus: 200, // some legacy browsers choke on 204
+  })
+);
 
 //global middleware
 
