@@ -6,7 +6,7 @@ const BlogDetails = () => {
   const { id } = useParams();
 
   //hook to get the data for the blogs
-  const { data: blog, error, isPending } = useFetch("/api/blogs/" + id);
+  const { data: blog, error, isPending } = useFetch("https://blog-backend-t7mbt.ondigitalocean.app/api/blogs/" + id);
 
   const navigate = useNavigate();
 
