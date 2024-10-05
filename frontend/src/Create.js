@@ -23,7 +23,7 @@ const Create = () => {
 
     setIsPending(true);
 
-    const response = await fetch("https://blog-backend-t7mbt.ondigitalocean.app/api/blogs/", {
+    const response = await fetch(process.env.REACT_APP_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),

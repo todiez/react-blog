@@ -6,7 +6,7 @@ const BlogDetails = () => {
   const { id } = useParams();
 
   //hook to get the data for the blogs
-  const { data: blog, error, isPending } = useFetch("https://blog-backend-t7mbt.ondigitalocean.app/api/blogs/" + id);
+  const { data: blog, error, isPending } = useFetch(process.env.REACT_APP_API_URL + id);
 
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const BlogDetails = () => {
     // prevent default action (page refresh)
     e.preventDefault();
 
-    fetch("/api/blogs/" + blog._id, {
+    fetch(process.env.REACT_APP_API_URL + blog._id, {
       method: "DELETE",
     }).then(() => {
       navigate("/");
