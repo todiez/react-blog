@@ -18,11 +18,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000", // allow to server to accept request from this origin
+    origin: process.env.FRONTEND_URL, // allow to server to accept request from this origin
     credentials: true,
   })
 );
-
 
 //global middleware
 
