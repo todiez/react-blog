@@ -42,28 +42,6 @@ const useFetch = (url) => {
     //calling the async function
     fetchData();
 
-    // fetch(url, { signal: abortCont.signal })
-    //   .then((res) => {
-    //     if (!res.ok) {
-    //       throw Error("could not fetch the data");
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     setData(data);
-    //     setIsPending(false);
-    //     setError(null);
-    //   })
-    //   .catch((err) => {
-    //     if (err.name === "AbortError") {
-    //       console.log("fetch aborted");
-    //       console.log(err);
-    //     } else {
-    //       setIsPending(false);
-    //       setError(err.message);
-    //     }
-    //   });
-
     // Cleanup function to abort the fetch
     return () => abortCont.abort();
   }, [url]);
